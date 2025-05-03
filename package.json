@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A simple nodejs app that makes it easier to deploy minecraft servers on azure virtual machnies",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "",
     "run": "nodemon index.js"
