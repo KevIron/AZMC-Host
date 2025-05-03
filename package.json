@@ -1,0 +1,19 @@
+{
+  "name": "azmc-host",
+  "version": "1.0.0",
+  "description": "A simple nodejs app that makes it easier to deploy minecraft servers on azure virtual machnies",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "run": "nodemon index.js"
+  },
+  "author": "KevIron",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.5.0",
+    "nodemon": "^3.1.10"
+  }
+}
