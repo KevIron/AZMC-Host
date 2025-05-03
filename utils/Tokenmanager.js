@@ -4,8 +4,6 @@ export default class TokenManager {
     static #token = "";
     static #expiryDate = 0;
 
-    static a = 0;
-
     static async #fetchToken() {
         const requestBody = {
             scope: "https://management.azure.com//.default",
@@ -23,8 +21,6 @@ export default class TokenManager {
         
         this.#token = resObj?.access_token;
         this.#expiryDate = Date.now() + resObj?.expires_in * 1000;
-
-        this.a += 1;
     }
 
     static async getToken() {
