@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Stealer</title>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module">
+        // const socket = io();
+
+        const groupsDisplay = document.querySelector(".server-groups");
+        
+        const availableGrups = await fetch("/listGroups");
+        const data = await availableGrups.json()
+        console.log(data)
+    </script>
+    
+</head>
+<body>
+    <main class="main-section">
+        <section class="server-groups"></section>
+        <aside class="server-info"></aside>
+    </main>
+</body>
+</html>

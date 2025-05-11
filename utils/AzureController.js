@@ -208,6 +208,38 @@ export class VirtualMachineController extends AzureController {
 		this.scope += `/resourcegroups/${resourceGroupName}/providers/Microsoft.Compute/virtualMachines`;
 	}
 
+	async get(vmName) {
+		const endpoint = `${this.scope}/${vmName}?api-version=2024-11-01`;
+		const params = this.constructRequestParams();
+
+		const res = await fetch(endpoint, params);
+		const data = await res.json()
+
+		return data;
+	}
+
+	async dealocate(vmName) {
+		const endpoint = `${this.scope}/${vmName}/deallocate?api-version=2024-11-01`;
+		const params = this.constructRequestParams("POST");
+
+		const res = await fetch(endpoint, params);
+
+		if (res.status === 200 || res.status === 202) return true;
+
+		return false;
+	}
+
+	async start(vmName) {
+		const endpoint = `${this.scope}/${vmName}/start?api-version=2024-11-01`;
+		const params = this.constructRequestParams("POST");
+
+		const res = await fetch(endpoint, params);
+
+		if (res.status === 200 || res.status === 202) return true;
+
+		return false;
+	}
+
 	async create(vmName, vmLocation, vmSize) {
 		const endpoint = `${this.scope}/${vmName}?api-version=2024-07-01`;
 
@@ -228,7 +260,7 @@ export class VirtualMachineController extends AzureController {
 				hardwareProfile: { vmSize: vmSize },
 				storageProfile: {
 					imageReference: {
-						sku: "16.04-LTS",
+						sku: "22.04-LTS",
 						publisher: "Canonical",
 						version: "latest",
 						offer: "UbuntuServer"
@@ -263,18 +295,3 @@ export class VirtualMachineController extends AzureController {
 		return data;
 	}
 }
-
-(async () => {
-	// Resource group controller test
-	const cnt = new ResourceGroupController();
-	await cnt.create("test", "eastus");
-	await cnt.list("test");
-	
-	// Virtual machine controller test
-	const cnt2 = new VirtualMachineController("test");
-	const vm = await cnt2.create("tster", "eastus", "Standard_B2ats_v2");
-	console.log(vm)
-
-	// Resource group controller test
-	await cnt.delete("test");
-})()
