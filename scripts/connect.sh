@@ -16,7 +16,7 @@ servicePrincipalID="$(az ad sp create --id $clientID | jq -r '.id')"
 
 _x="$(az role assignment create --assignee-object-id $servicePrincipalID --assignee-principal-type ServicePrincipal --role Owner --scope /subscriptions/$subscriptionID --name $servicePrincipalID | grep "")"
 
-echo $subscriptionID
 echo $tenantID 
+echo $subscriptionID
 echo $clientID 
 echo $secret 

@@ -8,19 +8,64 @@
     <script src="/socket.io/socket.io.js"></script>
     <script type="module">
         // const socket = io();
-
-        const groupsDisplay = document.querySelector(".server-groups");
-        
-        const availableGrups = await fetch("/listGroups");
-        const data = await availableGrups.json()
-        console.log(data)
     </script>
-    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            /* font-size: 62.5%; */
+
+            height: 100vh;
+            padding: 12px;
+        }
+
+        /* Main layout */
+
+        .panel-container {
+            display: grid;
+            grid-template-areas: 
+                "inspector server-details"
+                "options server-details";
+            
+            height: 100%;
+
+            gap: 12px;
+        }
+
+        .panel-container > div {
+            border: 2px solid black;
+        }
+
+        .server-list { grid-area: inspector }
+        .option-manager { grid-area: options }
+        .srver-overview { grid-area: server-details }
+
+        /* Server list */
+
+        .servers {
+            margin-left: 24px;
+        }
+    </style>
 </head>
 <body>
-    <main class="main-section">
-        <section class="server-groups"></section>
-        <aside class="server-info"></aside>
+    <main class="panel-container">
+        <div class="server-list">
+            <div class="server-group">
+                <h4>GROUP - 1</h4>
+                <ul class="servers">
+                    <li>Machine ...</li>
+                    <li>Machine ...</li>
+                </ul>
+            </div>
+        </div>
+        <div class="option-manager"></div>
+        <div class="srver-overview"></div>
     </main>
 </body>
 </html>
